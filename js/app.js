@@ -18,6 +18,21 @@ function addMove() {
 	movesText.innerHTML = moves;
 }
 
+//Star rating functionality
+function checkScore() {
+	if (moves === 18 || moves === 25)
+		{hideStar();
+		}
+}
+function hideStar() {
+	const starList = document.querySelectorAll('.stars li');
+	for (star of starList) {
+		if (star.style.display !== 'none') {
+			star.style.display = 'none';
+			break;
+	}}}
+
+
 const deck = document.querySelector('.deck');
 //Shuffle the deck!
 function shuffleDeck() {
@@ -56,6 +71,7 @@ deck.addEventListener('click', event => {
 		if (openCardList.length === 2) {
 			checkForMatch(clickTarget);
 			addMove();
+			checkScore();
 		}
 	}
 });	
