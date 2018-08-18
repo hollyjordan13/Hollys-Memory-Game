@@ -1,9 +1,36 @@
 /*
  * Create a list that holds all of your cards
  */
+//Clock Element Functionality
+let time = 0;
+let clockOff = true;
 
 
 
+function displayTime() {
+	const minutes = Math.floor(time / 60);
+	const seconds = time % 60;
+	const clock = document.querySelector('.clock');
+	clock.innerHTML = time;
+	if (seconds < 10) {
+		clock.innerHTML = `${minutes}:0${seconds}`;
+	} else {
+		clock.innerHTML = `${minutes}:${seconds}`;
+	}
+}
+function startClock() {
+	clockId = setInterval(() => {
+		time++;
+		displayTime();
+	}, 1000);
+}
+
+function stopClock() {
+	clearInterval(clockId);
+}
+
+
+const deck = document.querySelector('.deck');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -33,7 +60,7 @@ function hideStar() {
 	}}}
 
 
-const deck = document.querySelector('.deck');
+
 //Shuffle the deck!
 function shuffleDeck() {
 	const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
@@ -66,6 +93,12 @@ function addToggleCard(clickTarget) {
 deck.addEventListener('click', event => {
 	const clickTarget = event.target; 
 	if (isClickValid(clickTarget)) {
+		if (isClickValid(clickTarget)) {
+			if (clockOff) {
+				startClock();
+				clockOff = false;
+			}
+		}
 		toggleCard(clickTarget);
 		addToggleCard(clickTarget);
 		if (openCardList.length === 2) {
@@ -107,8 +140,6 @@ function checkForMatch() {
 }
 
 
-
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
@@ -123,6 +154,45 @@ function shuffle(array) {
 
 	return array;
 }
+
+//Test player stats
+time = 121;
+displayTime();
+moves = 16;
+checkScore();
+
+writeReportStats();
+toggleReport();
+//Show player stats upon completion of game
+function toggleReport() {
+	const report = document.querySelector('.report__background');
+	report.classList.toggle('hide');
+}
+
+function writeReportStats() {
+	const timeStat = document.querySelector('.report__time');
+	const clockTime = document.querySelector('.clock').innerHTML;
+	const movesStat = document.querySelector('.report__moves');
+	const starsStat = document.querySelector('report__stars');
+	const stars = getStars();
+
+	timeStat.innerHTML = `Time = ${clockTime}`;
+	movesStat.innerHTML = `Moves = ${moves}`;
+	starsStat.innerHTML = `Stars = ${stars}`;
+}
+
+function getStars() {
+	stars = document.querySelectorAll('.stars li');
+	starCount = 0;
+	for (star of stars) {
+		if (star.style.display !== 'none') {
+			starCount++;
+		}
+	}
+	console.log(starCount);
+	return starCount;
+
+//Report buttons functionality
 
 
 /*
