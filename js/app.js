@@ -1,18 +1,8 @@
 /*
  * Create a list that holds all of your cards
  */
-const cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", 
-				   "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", 
-	               "fa fa-diamond", "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", 
-	               "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"];
 
-//Define variables
-let movesCounter = 0;
-let timerStart; // Starting time
-let timerEnd; // End time
-let timerSpeed; // Timer speed
-let playerStars = 3; // Players life’s / rating
-let matchedCardList = [];	               
+
 
 /*
  * Display the cards on the page
@@ -21,26 +11,11 @@ let matchedCardList = [];
  *   - add each card's HTML to the page
  */
 
- //separate toggling into its own function
-function toggleCard(clickTarget) {
-	clickTarget.classList.toggle('open');
-	clickTarget.classList.toggle('show');
-}
-//set up event listener for card to flip when clicked
-//set conditions so that clicked cards are added to an openCardList array
-//set conditions that only allow up to 2 cards in openCardList
-const deck = document.querySelector('.deck');
-
-deck.addEventListener('click', event => {
-	const clickTarget = event.target; 
-	if (clickTarget.classList.contains('card') && openCardList.length < 2) {
-		toggleCard(clickTarget);
-		addToggleCard(clickTarget);
-		if (openCardList.length === 2) {
-			checkForMatch();
-		}
-	}
-});	
+//separate toggling into its own function
+function toggleCard(card) {
+	card.classList.toggle('open');
+	card.classList.toggle('show');
+} 
 
 //add cards to a list of open cards
 let openCardList = [];
@@ -50,6 +25,24 @@ function addToggleCard(clickTarget) {
 	console.log(openCardList);
 }
 
+//set up event listener for card to flip when clicked
+//set conditions so that clicked cards are added to an openCardList array
+//set conditions that only allow up to 2 cards in openCardList
+const deck = document.querySelector('.deck');
+
+deck.addEventListener('click', event => {
+	const clickTarget = event.target; 
+	if (clickTarget.classList.contains('card') && 
+		openCardList.length < 2 &&
+		!openCardList.includes(clickTarget)) {
+		toggleCard(clickTarget);
+		addToggleCard(clickTarget);
+		if (openCardList.length === 2) {
+			checkForMatch(clickTarget);
+		}
+	}
+});	
+
 //Checking for matches in openCardList
 //Use firstElementChild property, because it contains the 'i' (icon) element common to each card
 function checkForMatch() {
@@ -57,26 +50,36 @@ function checkForMatch() {
 		openCardList[0].firstElementChild.className ===
 		openCardList[1].firstElementChild.className
 		) {
-		console.log('Great Job!');
-	 	} else {
-	 		console.log('Nope! Try again!');
-	 	}
-	}
+		openCardList[0].classList.toggle('match');
+		openCardList[1].classList.toggle('match');
+		openCardList = [];
+		} else {
+			console.log('Nope! Try again!');
+			setTimeout(() => {
+				toggleCard(openCardList[0]);
+				toggleCard(openCardList[1]);
+				openCardList = [];
+			}, 1000);
+			
+		}
+}
+
+
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+	var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+	while (currentIndex !== 0) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
 
-    return array;
+	return array;
 }
 
 
