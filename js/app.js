@@ -10,6 +10,14 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+//'Moves' functionality
+let moves = 0;
+function addMove() {
+	moves++;
+	const movesText = document.querySelector('.moves');
+	movesText.innerHTML = moves;
+}
+
 const deck = document.querySelector('.deck');
 //Shuffle the deck!
 function shuffleDeck() {
@@ -47,6 +55,7 @@ deck.addEventListener('click', event => {
 		addToggleCard(clickTarget);
 		if (openCardList.length === 2) {
 			checkForMatch(clickTarget);
+			addMove();
 		}
 	}
 });	
