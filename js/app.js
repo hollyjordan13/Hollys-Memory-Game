@@ -12,7 +12,6 @@ let timerStart; // Starting time
 let timerEnd; // End time
 let timerSpeed; // Timer speed
 let playerStars = 3; // Players life’s / rating
-let openCardList = [];
 let matchedCardList = [];	               
 
 /*
@@ -21,16 +20,49 @@ let matchedCardList = [];
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-//set up event listener for card 
+
+ //separate toggling into its own function
+function toggleCard(clickTarget) {
+	clickTarget.classList.toggle('open');
+	clickTarget.classList.toggle('show');
+}
+//set up event listener for card to flip when clicked
+//set conditions so that clicked cards are added to an openCardList array
+//set conditions that only allow up to 2 cards in openCardList
 const deck = document.querySelector('.deck');
 
 deck.addEventListener('click', event => {
 	const clickTarget = event.target; 
-	if (clickTarget.classList.contains('card')) {
-		clickTarget.classList.toggle('open');
-		clickTarget.classList.toggle('show');
+	if (clickTarget.classList.contains('card') && openCardList.length < 2) {
+		toggleCard(clickTarget);
+		addToggleCard(clickTarget);
+		if (openCardList.length === 2) {
+			checkForMatch();
+		}
 	}
 });	
+
+//add cards to a list of open cards
+let openCardList = [];
+
+function addToggleCard(clickTarget) {
+	openCardList.push(clickTarget);
+	console.log(openCardList);
+}
+
+//Checking for matches in openCardList
+//Use firstElementChild property, because it contains the 'i' (icon) element common to each card
+function checkForMatch() {
+	if (
+		openCardList[0].firstElementChild.className ===
+		openCardList[1].firstElementChild.className
+		) {
+		console.log('Great Job!');
+	 	} else {
+	 		console.log('Nope! Try again!');
+	 	}
+	}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
