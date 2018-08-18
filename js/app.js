@@ -156,29 +156,11 @@ function shuffle(array) {
 }
 
 //Test player stats
-time = 121;
-displayTime();
-moves = 16;
-checkScore();
 
-writeReportStats();
-toggleReport();
 //Show player stats upon completion of game
 function toggleReport() {
 	const report = document.querySelector('.report__background');
 	report.classList.toggle('hide');
-}
-
-function writeReportStats() {
-	const timeStat = document.querySelector('.report__time');
-	const clockTime = document.querySelector('.clock').innerHTML;
-	const movesStat = document.querySelector('.report__moves');
-	const starsStat = document.querySelector('report__stars');
-	const stars = getStars();
-
-	timeStat.innerHTML = `Time = ${clockTime}`;
-	movesStat.innerHTML = `Moves = ${moves}`;
-	starsStat.innerHTML = `Stars = ${stars}`;
 }
 
 function getStars() {
@@ -190,9 +172,30 @@ function getStars() {
 		}
 	}
 	console.log(starCount);
-	return starCount;
+	return starCount;}
+
+function writeReportStats() {
+	const timeStat = document.querySelector('.report__time');
+	const clockTime = document.querySelector('.clock').innerHTML;
+	const movesStat = document.querySelector('.report__moves');
+	const starsStat = document.querySelector('.report__stars');
+	const stars = getStars();
+
+	timeStat.innerHTML = `Time = ${clockTime}`;
+	movesStat.innerHTML = `Moves = ${moves}`;
+	starsStat.innerHTML = `Stars = ${stars}`;
+}
+
+
+	
 
 //Report buttons functionality
+document.querySelector('.report__button__exit').addEventListener('click', () => {
+	toggleReport();
+});
+document.querySelector('.report__button__playagain').addEventListener('click', () => {
+	console.log('replay');
+});//TODO: CALL RESET GAME HERE
 
 
 /*
