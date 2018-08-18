@@ -10,6 +10,16 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+const deck = document.querySelector('.deck');
+//Shuffle the deck!
+function shuffleDeck() {
+	const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+	const shuffledCards = shuffle(cardsToShuffle);
+	for (card of shuffledCards) {
+		deck.appendChild(card);
+	}
+} 
+shuffleDeck();
 
 //separate toggling into its own function
 function toggleCard(card) {
@@ -28,7 +38,7 @@ function addToggleCard(clickTarget) {
 //set up event listener for card to flip when clicked
 //set conditions so that clicked cards are added to an openCardList array
 //set conditions that only allow up to 2 cards in openCardList
-const deck = document.querySelector('.deck');
+
 
 deck.addEventListener('click', event => {
 	const clickTarget = event.target; 
