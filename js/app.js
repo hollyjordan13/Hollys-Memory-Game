@@ -32,9 +32,7 @@ const deck = document.querySelector('.deck');
 
 deck.addEventListener('click', event => {
 	const clickTarget = event.target; 
-	if (clickTarget.classList.contains('card') && 
-		openCardList.length < 2 &&
-		!openCardList.includes(clickTarget)) {
+	if (isClickValid(clickTarget)) {
 		toggleCard(clickTarget);
 		addToggleCard(clickTarget);
 		if (openCardList.length === 2) {
@@ -42,6 +40,15 @@ deck.addEventListener('click', event => {
 		}
 	}
 });	
+
+function isClickValid(clickTarget) {
+	return (
+		clickTarget.classList.contains('card') && 
+		!clickTarget.classList.contains('match') &&
+		openCardList.length < 2 &&
+		!openCardList.includes(clickTarget)
+		);
+}
 
 //Checking for matches in openCardList
 //Use firstElementChild property, because it contains the 'i' (icon) element common to each card
