@@ -126,10 +126,6 @@ h1 {
     border-bottom: 1px solid gray;
 }
 
-.report__close {
-    font-weight: bold;
-    font-size: 2rem;
-}
 
 .report__stats {
     display: flex;
