@@ -1,9 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
+let matched = 0;
 //Clock Element Functionality
 let time = 0;
 let clockOff = true;
+let clockId;
 
 
 
@@ -118,16 +120,24 @@ function isClickValid(clickTarget) {
 		);
 }
 
+
 //Checking for matches in openCardList
 //Use firstElementChild property, because it contains the 'i' (icon) element common to each card
+
+
 function checkForMatch() {
 	if (
 		openCardList[0].firstElementChild.className ===
 		openCardList[1].firstElementChild.className
 		) {
+		setTimeout(function() {
 		openCardList[0].classList.toggle('match');
 		openCardList[1].classList.toggle('match');
 		openCardList = [];
+		setTimeout(function() {
+			checkWin();
+		}, 1500);
+		}, 800);
 		} else {
 			console.log('Nope! Try again!');
 			setTimeout(() => {
@@ -155,7 +165,6 @@ function shuffle(array) {
 	return array;
 }
 
-//Test player stats
 
 //Show player stats upon completion of game
 function toggleReport() {
@@ -193,10 +202,72 @@ function writeReportStats() {
 document.querySelector('.report__button__exit').addEventListener('click', () => {
 	toggleReport();
 });
-document.querySelector('.report__button__playagain').addEventListener('click', () => {
-	console.log('replay');
-});//TODO: CALL RESET GAME HERE
+document.querySelector('.report__button__playagain').addEventListener('click', replayGame);
 
+//Reset game
+document.querySelector('.restart').addEventListener('click', resetGame);
+document.querySelector('.report__button__playagain').addEventListener('click', resetGame);
+
+
+
+function resetClockAndTime() {
+	stopClock();
+	clockOff = true;
+	time = 0;
+	displayTime();
+}
+
+function resetMoves() {
+	moves = 0;
+	document.querySelector('.moves').innerHTML = moves;
+}
+
+function resetStars() {
+	stars = 0;
+	const starList = document.querySelectorAll('.stars li');
+	for (star of starList) {
+		star.style.display = 'inline';
+	}
+}
+
+function resetGame() {
+	resetClockAndTime();
+	resetMoves();
+	resetStars();
+	resetCards();
+	shuffleDeck();
+}
+
+//Check for win
+function checkWin() {
+
+	matched += 1;
+	if (matched === 8) {
+		gameOver();
+		console.log('finished')
+	}
+}
+//Game Over
+function gameOver() {
+	stopClock();
+	writeReportStats ();
+	toggleReport();
+	}
+		
+
+function replayGame() {
+	resetGame();
+	toggleReport();
+	resetCards();
+	resetStars();
+}
+
+function resetCards() {
+	const cards = document.querySelectorAll('.deck li');
+	for (let card of cards) {
+		card.classList = 'card';
+	}
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
