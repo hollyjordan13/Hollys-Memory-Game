@@ -136,7 +136,7 @@ function checkForMatch() {
 		openCardList = [];
 		setTimeout(function() {
 			checkWin();
-		}, 1500);
+		}, 1000);
 		}, 800);
 		} else {
 			console.log('Nope! Try again!');

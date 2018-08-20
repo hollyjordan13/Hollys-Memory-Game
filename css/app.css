@@ -110,6 +110,7 @@ h1 {
 
 .report__background {
     position: absolute;
+    z-index: 80;
     top: 0;
     left: 0;
     height: 150%;
@@ -148,6 +149,7 @@ h1 {
 
 .report__body {
     position: relative;
+    z-index: 99;
     width: 400px;
     top: 50%;
     left: 50%;
