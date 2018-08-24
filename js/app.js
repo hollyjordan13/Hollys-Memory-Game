@@ -231,6 +231,7 @@ function resetStars() {
 }
 
 function resetGame() {
+	openCardList = [];
 	resetClockAndTime();
 	resetMoves();
 	resetStars();
@@ -244,7 +245,6 @@ function checkWin() {
 	matched += 1;
 	if (matched === 8) {
 		gameOver();
-		console.log('finished')
 	}
 }
 //Game Over
