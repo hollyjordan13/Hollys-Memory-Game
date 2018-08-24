@@ -109,4 +109,4 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 This repository is a project for the Udacity Front-End Web Developer Nanodegree. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
-# Hollys-Memory-Game
+
