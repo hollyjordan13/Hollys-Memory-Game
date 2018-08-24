@@ -35,15 +35,15 @@ The key is to find all the matches in the shortest amount of time, in the fewest
 
 In the real-life game, players flip over cards to locate the pairs that match. The goal is to recreate this effect in this project. There are a couple of interactions that need to be considered:
 
--Flipping cards
--What happens when cards match
--What happens when cards do not match
--When the game finishes
--Resetting the game
+- Flipping cards
+- What happens when cards match
+- What happens when cards do not match
+- When the game finishes
+- Resetting the game
 
 ## Specifications
 
-#Game Behavior
+### Game Behavior
 
 **Memory Game Logic**
 
@@ -71,7 +71,7 @@ When the player starts a game, a displayed timer should also start. Once the pla
 
 Game displays the current number of moves a user has made.
 
-#Interface Design
+### Interface Design
 
 **Styling**
 
@@ -81,7 +81,7 @@ Application uses CSS to style components for the game.
 
 All application components are usable across modern desktop, tablet, and phone browsers.
 
-#Documentation
+### Documentation
 
 **README**
 
@@ -99,10 +99,10 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 
 ## Acknowledgements
 
-[Udacity](https://www.udacity.com/), for creating this degree program, and providing me with education and endless support
-[JQuery](https://jquery.com/), for useful, time-saving shortcuts as well as help blogs
-[stackoverflow](https://stackoverflow.com/), for the collaborative forums and discussions which helped answer many of my questions
-[Mozilla Developer Network](https://developer.mozilla.org/en-US/), for so many resources and instructions
+* [Udacity](https://www.udacity.com/), for creating this degree program, and providing me with education and endless support
+* [JQuery](https://jquery.com/), for useful, time-saving shortcuts as well as help blogs
+* [stackoverflow](https://stackoverflow.com/), for the collaborative forums and discussions which helped answer many of my questions
+* [Mozilla Developer Network](https://developer.mozilla.org/en-US/), for so many resources and instructions
 
 ## Contributing
 
